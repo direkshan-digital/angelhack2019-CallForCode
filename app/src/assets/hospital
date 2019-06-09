@@ -1,0 +1,29 @@
+{
+  "hospitals": [
+      {
+        "name": "NewYork–Presbyterian Hospital",
+        "latitude": 28.6117993,
+        "longitude": 77.2194934
+      },
+      {
+        "name": "Mount Sinai,",
+        "latitude": 28.6132098,
+        "longitude": 77.245437
+      },
+      {
+        "name": "Bellevue Hospital",
+        "latitude": 21.1699005,
+        "longitude": 72.7955734
+      },
+      {
+        "name": "NYU Langone",
+        "latitude": 32.2263696,
+        "longitude": 76.325326
+      },
+            {
+        "name": "Morristown Medical Center",
+        "latitude": 32.2263696,
+        "longitude": 76.325326
+      }
+      ]
+}

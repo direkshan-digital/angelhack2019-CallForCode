@@ -1,0 +1,90 @@
+<ion-header>
+    <ion-toolbar>
+      <ion-title>Havenn</ion-title>
+      <ion-buttons slot="end">
+        <ion-button (click)="allHospitalMap()">
+          <ion-icon name="pin"></ion-icon>All Hospitals
+        </ion-button>
+      </ion-buttons>
+    </ion-toolbar>
+  </ion-header>
+
+<ion-content>
+    <ion-card>
+      <ion-card-content>
+          <div class="ion-padding">
+              <ion-item>
+                <ion-label position="floating">Search Map</ion-label>
+                <ion-input type="text" placeholder="Search Hospital..." (input)="searchMaps($event)"></ion-input>
+              </ion-item>
+          
+              <ion-list *ngIf="!isfiltered">
+                <ion-item *ngFor="let hospital of hospitalData" (click)="getHospitalDetails(hospital)">
+                  <ion-icon name="pin"></ion-icon>{{ hospital.name }}
+                  <p>State name: {{ hospital.state }}</p>
+                </ion-item>
+              </ion-list>
+          
+              <ion-list *ngIf="isfiltered">
+                <ion-item *ngFor="let hospital of filteredHospital" (click)="getHospitalDetails(hospital)">
+                  <h2>
+                    <ion-icon name="pin"></ion-icon>{{ hospital.name }}
+                  </h2>
+                  <p>State name: {{ hospital.state }}</p>
+                </ion-item>
+              </ion-list>
+            </div>
+      </ion-card-content>
+    </ion-card>
+    <ion-card class="welcome-card">
+      <ion-img src="/assets/shapes.svg"></ion-img>
+      <ion-card-header>
+        <ion-card-title>Welcome to Havenn</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <p>Decentralized Consortium of Healthcare Providers</p>
+        <ion-button>
+            Register Your Hospital
+        </ion-button>
+      </ion-card-content>
+    </ion-card>
+    <div class="ion-padding">
+    <ion-item>
+      <ion-label position="floating">Search Mapjs</ion-label>
+      <ion-input type="text" placeholder="Search Museum..." (input)="searchMaps($event)"></ion-input>
+    </ion-item>
+
+    <ion-list *ngIf="!isfiltered">
+      <ion-item *ngFor="let museum of museumData" (click)="getMuseumDetails(museum)">
+        <ion-icon name="pin"></ion-icon>{{ museum.name }}
+        <p>State name: {{ museum.state }}</p>
+      </ion-item>
+    </ion-list>
+
+    <ion-list *ngIf="isfiltered">
+      <ion-item *ngFor="let museum of filteredMuseum" (click)="getMuseumDetails(museum)">
+        <h2>
+          <ion-icon name="pin"></ion-icon>{{ museum.name }}
+        </h2>
+        <p>State name: {{ museum.state }}</p>
+      </ion-item>
+    </ion-list>
+  </div>
+    <ion-list lines="none">
+      <ion-list-header>
+        <ion-label>Resources</ion-label>
+      </ion-list-header>
+      <ion-item href="https://ionicframework.com/docs/">
+        <ion-icon slot="start" color="medium" name="book"></ion-icon>
+        <ion-label>Documentation</ion-label>
+      </ion-item>
+      <ion-item href="https://www.oasas.ny.gov/pio/eFINDS">
+        <ion-icon slot="start" color="medium" name="grid"></ion-icon>
+        <ion-label>eFINDS</ion-label>
+      </ion-item>
+      <ion-item href="https://www1.nyc.gov/site/immigrants/help/city-services/disaster-assistance.page">
+        <ion-icon slot="start" color="medium" name="color-fill"></ion-icon>
+        <ion-label>NYC Disaster Assistance</ion-label>
+      </ion-item>
+    </ion-list>
+</ion-content>

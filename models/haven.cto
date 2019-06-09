@@ -1,0 +1,130 @@
+/**
+ * Haven network definition.
+ */
+namespace org.haven.basic
+
+enum Role {
+  o Hospital
+  o Shelter
+  o Government
+}
+
+enum PhoneType {
+  o Work
+  o Home
+  o Mobile
+}
+
+enum Facility {
+  o Pharmacy
+  o ICU
+  o Nursery
+}
+
+enum CapacityType {
+  o Wheelchair
+  o Bed
+  o Ambulance
+}
+
+concept Phone {
+  o String number
+  o PhoneType type
+}
+
+abstract concept Person {
+  o String firstName
+  o String lastName
+  o String email
+  o Phone phoneNumber
+}
+
+abstract concept Capacity {
+  o Integer Number
+  o CapacityType type
+}
+
+concept Capability extends Capacity {
+  o Integer available optional
+}
+
+concept Contact extends Person {
+  o Boolean isPrimary
+}
+
+concept Patient extends Person {
+  o Boolean hasSpecialNeeds default=true
+}
+
+abstract concept Address {
+  o String street
+  o String city default ="New York"
+  o String country default = "USA"
+}
+
+concept Organization {
+  o String name
+  o Role role
+  o Address address
+  o Phone Phone
+  o Contact contactPerson
+}
+
+concept UnitedStatesAddress extends Address {
+  o String zipcode
+  o String county optional
+}
+
+asset SpecialNeedsPatient identified by patientId {
+  o String patientId
+  o Patient patient
+  --> Hospital hospital
+}
+
+participant Hospital identified by hospitalId {
+  o String hospitalId
+  o Organization org
+  o Boolean isActive
+  o Facility[] facilities
+  o Capability[] capabilities
+}
+
+transaction RequestAssistance {
+  --> Hospital affected
+  o SpecialNeedsPatient[] patient
+}
+
+event EmergencyRequested {
+  --> Hospital affected
+}
+
+transaction Match {
+  o Hospital relocateFrom
+  o Hospital relocateTo
+}
+
+event HelpIsOnTheWay {
+  --> Hospital from
+}
+
+transaction EvacuatePatients {
+  --> Hospital relocateTo
+  o SpecialNeedsPatient[] patient
+}
+
+event RelocationInProgress {
+  --> SpecialNeedsPatient patient
+  o Hospital from
+  o Hospital to
+}
+
+transaction AcceptRelocatedPatients {
+  --> Hospital relocateTo
+  o SpecialNeedsPatient[] patient
+}
+
+event RelocationCompleted {
+  --> SpecialNeedsPatient patient
+  o Hospital from
+  o Hospital to
+}

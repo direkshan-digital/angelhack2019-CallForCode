@@ -1,0 +1,7 @@
+{
+  "name": "havenn",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "angular"
+}
